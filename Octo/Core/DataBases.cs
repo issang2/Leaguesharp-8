@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using LeagueSharp;
 
-namespace OctoCore
+namespace Core
 {
     public class DataBases
     {
+        public static Obj_AI_Hero Player = ObjectManager.Player;
+
         public static class Champion
         {
             public static class StatsDb
@@ -201,27 +203,6 @@ namespace OctoCore
                     }
                 }
             }
-        }
-
-        public class Teams
-        {
-            //TODO: finish
-             public class TeamBase
-             {
-                 public List<MemberBase> Members;
-                 public int TotalGold;
-                 public int TotalAd;
-                 public int TotalAp;
-                 public int TotalArmor;
-                 public int TotalMr;
-                 public int TotalHp;
-                 public int TotalEffectiveHp;
-
-                 public class MemberBase
-                 {
-                      
-                 }
-             }
         }
     }
 }

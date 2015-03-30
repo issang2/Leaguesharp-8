@@ -1,4 +1,4 @@
-﻿namespace OctoCore
+﻿namespace Core
 {
     class WardAdvisor
     {

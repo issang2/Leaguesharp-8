@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="OctoCore.Enumerators">
+  <Class Name="Core.Enumerators">
     <Position X="5.75" Y="3" Width="2" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="OctoCore.Enumerators.Positions" Collapsed="true">
+      <Class Name="Core.Enumerators.Positions" Collapsed="true">
         <Compartments>
           <Compartment Name="Nested Types" Collapsed="false" />
         </Compartments>
@@ -14,7 +14,7 @@
           <NewMemberFileName>Enumerators.cs</NewMemberFileName>
         </TypeIdentifier>
       </Class>
-      <Class Name="OctoCore.Enumerators.Objective" Collapsed="true">
+      <Class Name="Core.Enumerators.Objective" Collapsed="true">
         <Compartments>
           <Compartment Name="Nested Types" Collapsed="false" />
         </Compartments>
@@ -22,27 +22,27 @@
           <NewMemberFileName>Enumerators.cs</NewMemberFileName>
         </TypeIdentifier>
       </Class>
-      <Class Name="OctoCore.Enumerators.StatisticsRelated">
+      <Class Name="Core.Enumerators.StatisticsRelated">
         <Compartments>
           <Compartment Name="Nested Types" Collapsed="false" />
         </Compartments>
         <NestedTypes>
-          <Enum Name="OctoCore.Enumerators.StatisticsRelated.PrimaryRoles" Collapsed="true">
+          <Enum Name="Core.Enumerators.StatisticsRelated.PrimaryRoles" Collapsed="true">
             <TypeIdentifier>
               <NewMemberFileName>Enumerators.cs</NewMemberFileName>
             </TypeIdentifier>
           </Enum>
-          <Enum Name="OctoCore.Enumerators.StatisticsRelated.SecondaryRoles" Collapsed="true">
+          <Enum Name="Core.Enumerators.StatisticsRelated.SecondaryRoles" Collapsed="true">
             <TypeIdentifier>
               <NewMemberFileName>Enumerators.cs</NewMemberFileName>
             </TypeIdentifier>
           </Enum>
-          <Enum Name="OctoCore.Enumerators.StatisticsRelated.UtilityLevel" Collapsed="true">
+          <Enum Name="Core.Enumerators.StatisticsRelated.UtilityLevel" Collapsed="true">
             <TypeIdentifier>
               <NewMemberFileName>Enumerators.cs</NewMemberFileName>
             </TypeIdentifier>
           </Enum>
-          <Enum Name="OctoCore.Enumerators.StatisticsRelated.GameRoles" Collapsed="true">
+          <Enum Name="Core.Enumerators.StatisticsRelated.GameRoles" Collapsed="true">
             <TypeIdentifier>
               <NewMemberFileName>Enumerators.cs</NewMemberFileName>
             </TypeIdentifier>
@@ -58,47 +58,84 @@
       <FileName>Enumerators.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OctoCore.Simulations">
-    <Position X="4" Y="2" Width="1.5" />
+  <Class Name="Core.Simulations">
+    <Position X="3.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Simulations.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OctoCore.DataBases">
+  <Class Name="Core.DataBases">
     <Position X="3.75" Y="3" Width="1.75" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="OctoCore.DataBases.Champion" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>DataBases.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="OctoCore.DataBases.Teams" Collapsed="true">
+      <Class Name="Core.DataBases.Champion" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>DataBases.cs</NewMemberFileName>
         </TypeIdentifier>
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>DataBases.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OctoCore.ObjectiveController">
-    <Position X="8.25" Y="3" Width="1.75" />
+  <Class Name="Core.ObjectiveController">
+    <Position X="8.25" Y="3" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Core.ObjectiveController.TurretBase" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ObjectiveController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="Core.ObjectiveController.TurretLocations" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ObjectiveController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAABAAAAAAAAAAAAAACCAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>ObjectiveController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OctoCore.WardAdvisor">
-    <Position X="6" Y="2" Width="1.5" />
+  <Class Name="Core.WardAdvisor">
+    <Position X="5.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WardAdvisor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.TeamController">
+    <Position X="12.75" Y="3" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Core.TeamController.TeamBase">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <NestedTypes>
+          <Class Name="Core.TeamController.TeamBase.MemberBase">
+            <TypeIdentifier>
+              <NewMemberFileName>TeamController.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+        </NestedTypes>
+        <TypeIdentifier>
+          <NewMemberFileName>TeamController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TeamController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

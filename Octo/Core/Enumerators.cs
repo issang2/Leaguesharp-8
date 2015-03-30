@@ -4,10 +4,11 @@ using System.ComponentModel;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace OctoCore
+namespace Core
 {
     public static class Enumerators
     {
@@ -523,123 +524,6 @@ namespace OctoCore
                     }
 
                     public enum EnemyRed
-                    {
-                        Priority,
-                        Difficulty,
-                        Position,
-                    }
-                }
-            }
-
-            public class Structures
-            {
-                public class Towers
-                {
-                    public class Outer
-                    {
-                        public enum Top
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                        public enum Mid
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                        public enum Bot
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                    }
-
-                    public class Inner
-                    {
-                        public enum Top
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-
-                        public enum Mid
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-
-                        public enum Bot
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                    }
-
-                    public class Inhibitor
-                    {
-                        public enum Top
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-
-                        public enum Mid
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-
-                        public enum Bot
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                    }
-
-                    public class Nexi
-                    {
-                         public enum NexiTurrets
-                         {
-                             Priority,
-                             Difficulty,
-                             Position,
-                         }
-
-                        public enum Nexus
-                        {
-                            Priority,
-                            Difficulty,
-                            Position,
-                        }
-                    }
-
-                }
-
-                public class Inhibitors
-                {
-                    public enum Top
-                    {
-                        Priority,
-                        Difficulty,
-                        Position,
-                    }
-                    public enum Mid
-                    {
-                        Priority,
-                        Difficulty,
-                        Position,
-                    }
-
-                    public enum Bot
                     {
                         Priority,
                         Difficulty,
