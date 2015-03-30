@@ -4,6 +4,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 using Color = System.Drawing.Color;
+// ReSharper disable InvertIf
 
 // ReSharper disable NotAccessedVariable
 // ReSharper disable RedundantAssignment
@@ -31,6 +32,10 @@ namespace Meth_Lissy
 
         private static void Game_OnGameStart(EventArgs args)
         {
+            if (Player.Name != "Lissandra")
+            {
+                return;
+            }
             Game.PrintChat("Meth_Lissandra by HyunMi loaded");
             #region Menu
             {
@@ -60,7 +65,7 @@ namespace Meth_Lissy
                             manaLimiters.AddItem(new MenuItem("hyunmi.lissandra.combo.spells.manalimiters.w", "W mana limiter").SetValue(new Slider(0)));
                             manaLimiters.AddItem(new MenuItem("hyunmi.lissandra.combo.spells.manalimiters.e", "E mana limiter").SetValue(new Slider(0)));
                             manaLimiters.AddItem(new MenuItem("hyunmi.lissandra.combo.spells.manalimiters.r", "R mana limiter").SetValue(new Slider(0)));
-                            manaLimiters.AddItem(new MenuItem("Set to 0 to disable ", "hyunmi.lissandra.combo.spells.manalimiters.notification"));
+                            manaLimiters.AddItem(new MenuItem("hyunmi.lissandra.combo.spells.manalimiters.notification", "Set to 0 to disable"));
                         }
                         spells.AddSubMenu(manaLimiters);
                     }
@@ -202,12 +207,51 @@ namespace Meth_Lissy
 
         private static void Game_OnUpdate(EventArgs args)
         {
-            if (Player.HasBuff("LissandraPassiveReady"))
+            if (_ignite.IsReady() && _menu.Item("hyunmi.lissandra.misc.ignite").GetValue<bool>())
             {
-                _ringOfFrost.Cast();
+                foreach (Obj_AI_Hero target in Player.GetEnemiesInRange(_ignite.Range).Where(target => _ignite.GetDamage(target) > target.Health))
+                {
+                    _ignite.Cast(target);
+                }
+            }
+
+            switch (_orbwalker.ActiveMode)
+            {
+                case Orbwalking.OrbwalkingMode.Combo:
+                    Combo();
+                    break;
+                case Orbwalking.OrbwalkingMode.LaneClear:
+                    LaneClear();
+                    break;
+                case Orbwalking.OrbwalkingMode.LastHit:
+                    LastHit();
+                    break;
+                case Orbwalking.OrbwalkingMode.Mixed:
+                    Harass();
+                    break;
             }
         }
-        
+
+        private static void LastHit()
+        {
+
+        }
+
+        private static void LaneClear()
+        {
+
+        }
+
+        private static void Harass()
+        {
+
+        }
+
+        private static void Combo()
+        {
+
+        }
+
         private static void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
         {
             if (Vector2.Distance(Player.Position.To2D(), gapcloser.Sender.Position.To2D()) < _ringOfFrost.Range && _ringOfFrost.IsReady())
@@ -219,22 +263,6 @@ namespace Meth_Lissy
                 }
             }
         }
-
-        //TODO: rewrite all logic
-        private static void Laneclear()
-        {
-
-        }
-
-        private static void Harass()
-        {
-
-        }
-        private static void Lasthit()
-        {
-
-        }
-
 
         private static void Drawing_OnDraw(EventArgs args)
         {
