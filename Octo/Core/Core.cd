@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OctoCore.Enumerators">
+    <Position X="5.75" Y="3" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="OctoCore.Enumerators.Positions" Collapsed="true">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <TypeIdentifier>
+          <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="OctoCore.Enumerators.Objective" Collapsed="true">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <TypeIdentifier>
+          <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="OctoCore.Enumerators.StatisticsRelated">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <NestedTypes>
+          <Enum Name="OctoCore.Enumerators.StatisticsRelated.PrimaryRoles" Collapsed="true">
+            <TypeIdentifier>
+              <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Enum>
+          <Enum Name="OctoCore.Enumerators.StatisticsRelated.SecondaryRoles" Collapsed="true">
+            <TypeIdentifier>
+              <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Enum>
+          <Enum Name="OctoCore.Enumerators.StatisticsRelated.UtilityLevel" Collapsed="true">
+            <TypeIdentifier>
+              <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Enum>
+          <Enum Name="OctoCore.Enumerators.StatisticsRelated.GameRoles" Collapsed="true">
+            <TypeIdentifier>
+              <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Enum>
+        </NestedTypes>
+        <TypeIdentifier>
+          <NewMemberFileName>Enumerators.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumerators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctoCore.Simulations">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Simulations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctoCore.DataBases">
+    <Position X="3.75" Y="3" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="OctoCore.DataBases.Champion" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DataBases.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="OctoCore.DataBases.Teams" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DataBases.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataBases.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctoCore.ObjectiveController">
+    <Position X="8.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ObjectiveController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctoCore.WardAdvisor">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WardAdvisor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
