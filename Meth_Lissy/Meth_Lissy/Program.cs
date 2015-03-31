@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
@@ -32,7 +33,7 @@ namespace Meth_Lissy
 
         private static void Game_OnGameStart(EventArgs args)
         {
-            if (Player.Name != "Lissandra")
+            if (Player.BaseSkinName != "Lissandra")
             {
                 return;
             }
@@ -116,6 +117,8 @@ namespace Meth_Lissy
                     laneclear.AddSubMenu(spells);
                     //settings go here
                     laneclear.AddItem(new MenuItem("hyunmi.lissandra.laneclear.harass", "Auto harass").SetValue(true));
+                    laneclear.AddItem(new MenuItem("hyunmi.lissandra.laneclear.smartPassive", "Smart usage of passive").SetValue(true));
+                    laneclear.AddItem(new MenuItem("hyunmi.lissandra.laneclear.groupfocus", "Focus group of minions").SetValue(false));
                 }
                 _menu.AddSubMenu(laneclear);
 
@@ -165,7 +168,6 @@ namespace Meth_Lissy
                 Menu misc = new Menu("Misc", "hyunmi.lissandra.misc");
                 {
                     misc.AddItem(new MenuItem("hyunmi.lissandra.misc.ignite", "AutoIgnite on killable").SetValue(true));
-                    misc.AddItem(new MenuItem("hyunmi.lissandra.misc.smartPassive", "Smart usage of passive").SetValue(true));
                 }
                 _menu.AddSubMenu(misc);
 
@@ -202,7 +204,13 @@ namespace Meth_Lissy
             
             Drawing.OnDraw += Drawing_OnDraw;
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
+            GameObject.OnCreate += GameObject_OnCreate;
             Game.OnUpdate += Game_OnUpdate;
+        }
+
+        private static void GameObject_OnCreate(GameObject sender, EventArgs args)
+        {
+
         }
 
         private static void Game_OnUpdate(EventArgs args)
@@ -237,9 +245,296 @@ namespace Meth_Lissy
 
         }
 
+        // ReSharper disable once FunctionComplexityOverflow
         private static void LaneClear()
         {
+            bool smartPassive = _menu.Item("hyunmi.lissandra.laneclear.smartPassive").GetValue<bool>();
+            bool groupFocus = _menu.Item("hyunmi.lissandra.laneclear.groupfocus").GetValue<bool>();
+            bool useQ = _menu.Item("hyunmi.lissandra.laneclear.spells.q").GetValue<bool>();
+            bool useW = _menu.Item("hyunmi.lissandra.laneclear.spells.w").GetValue<bool>();
+            bool useE = _menu.Item("hyunmi.lissandra.laneclear.spells.e").GetValue<bool>();
 
+            if (smartPassive && Player.HasBuff("LissandraPassiveReady"))
+            {
+                if (groupFocus)
+                {
+                    if (useQ && !useW && !useE && _iceShard.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useQ && useW && _iceShard.IsReady() && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useE && _glacialPath.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _glacialPath.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_glacialPath.Range),
+                                    _glacialPath.Delay, _glacialPath.Width, _glacialPath.Speed, Player.Position,
+                                    _glacialPath.Range,
+                                    false, SkillshotType.SkillshotLine), _glacialPath.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _glacialPath.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useQ && _iceShard.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useW && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                    }
+                }
+                else
+                {
+                    if (useQ && !useW && !useE && _iceShard.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useQ && useW && _iceShard.IsReady() && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useE && _glacialPath.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_glacialPath.Range)
+                                .Where(minion => minion.Health < _glacialPath.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _glacialPath.Cast(_glacialPath.GetPrediction(targetMinion, false, _glacialPath.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useQ && _iceShard.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useW && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                    }
+                }
+            }
+
+            if (!smartPassive)
+            {
+                if (groupFocus)
+                {
+                    if (useQ && !useW && !useE && _iceShard.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useQ && useW && _iceShard.IsReady() && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useE && _glacialPath.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _glacialPath.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_glacialPath.Range),
+                                    _glacialPath.Delay, _glacialPath.Width, _glacialPath.Speed, Player.Position,
+                                    _glacialPath.Range,
+                                    false, SkillshotType.SkillshotLine), _glacialPath.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _glacialPath.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useQ && _iceShard.IsReady())
+                    {
+                        MinionManager.FarmLocation farmLocation =
+                            _iceShard.GetLineFarmLocation(
+                                MinionManager.GetMinionsPredictedPositions(MinionManager.GetMinions(_iceShard.Range),
+                                    _iceShard.Delay, _iceShard.Width, _iceShard.Speed, Player.Position, _iceShard.Range,
+                                    false, SkillshotType.SkillshotLine), _iceShard.Width);
+                        if (farmLocation.MinionsHit != 0)
+                        {
+                            _iceShard.Cast(farmLocation.Position);
+                        }
+                    }
+
+                    if (useW && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                    }
+                }
+                else
+                {
+                    if (useQ && !useW && !useE && _iceShard.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useQ && useW && _iceShard.IsReady() && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useE && _glacialPath.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_glacialPath.Range)
+                                .Where(minion => minion.Health < _glacialPath.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _glacialPath.Cast(_glacialPath.GetPrediction(targetMinion, false, _glacialPath.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useQ && _iceShard.IsReady())
+                    {
+                        Obj_AI_Base targetMinion =
+                            MinionManager.GetMinions(_iceShard.Range)
+                                .Where(minion => minion.Health < _iceShard.GetDamage(minion))
+                                .OrderByDescending(minion => minion.Health).Last();
+                        if (Math.Abs(targetMinion.Health) > 0.0001)
+                        {
+                            _iceShard.Cast(_iceShard.GetPrediction(targetMinion, false, _iceShard.Range,
+                                new[] {CollisionableObjects.YasuoWall}).CastPosition);
+                        }
+                    }
+
+                    if (useW && _ringOfFrost.IsReady())
+                    {
+                        List<Obj_AI_Base> minionsW = MinionManager.GetMinions(_ringOfFrost.Range);
+                        if (minionsW.Count > 3)
+                        {
+                            _ringOfFrost.Cast();
+                        }
+                    }
+                }
+            }
         }
 
         private static void Harass()
@@ -289,7 +584,7 @@ namespace Meth_Lissy
             if (_menu.Item("hyunmi.lissandra.drawings.minions").GetValue<bool>())
             {
                 var minions = MinionManager.GetMinions(1200);
-                foreach (Obj_AI_Base minion in minions.Where(minion => minion.Health < Player.GetAutoAttackDamage(minion)/0.9))
+                foreach (Obj_AI_Base minion in minions.Where(minion => minion.Health < Player.GetAutoAttackDamage(minion)/0.85))
                 {
                     Render.Circle.DrawCircle(minion.Position, 75, Color.BlueViolet);
                 }
