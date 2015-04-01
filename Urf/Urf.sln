@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nami", "Nami\Nami.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sivir", "Sivir\Sivir.csproj", "{93D3039D-6003-4BB0-AC02-30EB77387481}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nidalee", "Nidalee\Nidalee.csproj", "{B591778F-9837-4C9F-A82E-5A49346CDB7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{93D3039D-6003-4BB0-AC02-30EB77387481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D3039D-6003-4BB0-AC02-30EB77387481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D3039D-6003-4BB0-AC02-30EB77387481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B591778F-9837-4C9F-A82E-5A49346CDB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B591778F-9837-4C9F-A82E-5A49346CDB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B591778F-9837-4C9F-A82E-5A49346CDB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B591778F-9837-4C9F-A82E-5A49346CDB7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

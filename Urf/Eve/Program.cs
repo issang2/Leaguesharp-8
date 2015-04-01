@@ -37,17 +37,17 @@ namespace Eve
                 {
                     _q.CastOnUnit(Player.GetEnemiesInRange(500).OrderByDescending(tar => tar.Health).Last());
                 }
-                else
-                {
-                    Obj_AI_Base targetMinion = MinionManager.GetMinions(500).OrderByDescending(minion => minion.Health).Last();
-                    _q.CastOnUnit(targetMinion);
-                }
+                //else
+                //{
+                //    Obj_AI_Base targetMinion = MinionManager.GetMinions(500).OrderByDescending(minion => minion.Health).Last();
+                //    _q.CastOnUnit(targetMinion);
+                //}
             }
 
-            if (_e.IsReady())
-            {
-                _e.Cast();
-            }
+            //if (_e.IsReady())
+            //{
+            //    _e.Cast();
+            //}
         }
     }
 }
