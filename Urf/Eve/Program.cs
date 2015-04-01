@@ -33,10 +33,7 @@ namespace Eve
             if (Player.IsRecalling()) return;
             if (_q.IsReady())
             {
-                if (Player.CountEnemiesInRange(500) > 0)
-                {
-                    _q.CastOnUnit(Player.GetEnemiesInRange(500).OrderByDescending(tar => tar.Health).Last());
-                }
+                _q.CastOnBestTarget(_q.Range);
                 //else
                 //{
                 //    Obj_AI_Base targetMinion = MinionManager.GetMinions(500).OrderByDescending(minion => minion.Health).Last();
