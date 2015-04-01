@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Threading;
-using LeagueSharp;
-using LeagueSharp.Common;
-using SharpDX;
-using Color = System.Drawing.Color;
 using System.Media;
 using System.Net;
+using LeagueSharp;
+using LeagueSharp.Common;
 
 // ReSharper disable InvertIf
-
-// ReSharper disable NotAccessedVariable
-// ReSharper disable RedundantAssignment
-// ReSharper disable UnusedVariable
-//
 namespace Meth_Lissy
 {
     static class Program
@@ -36,10 +29,9 @@ namespace Meth_Lissy
 
         private static void Game_OnGameStart(EventArgs args)
         {
-            if (Player.BaseSkinName != "Lissandra")
-            {
+            if (Player.ChampionName != "Lissandra")
                 return;
-            }
+
             Game.PrintChat("Meth_Lissandra by HyunMi loaded");
             #region Menu
             {
@@ -255,96 +247,6 @@ namespace Meth_Lissy
         }
 
         //TODO: add manalimiters
-        //TODO: remove redundancy
-        // ReSharper disable once FunctionComplexityOverflow
-        private static void LastHit()
-        {
-            bool smartPassive = _menu.Item("hyunmi.lissandra.lasthit.smartPassive").GetValue<bool>();
-            bool groupFocus = _menu.Item("hyunmi.lissandra.lasthit.groupfocus").GetValue<bool>();
-            bool useQ = _menu.Item("hyunmi.lissandra.lasthit.spells.q").GetValue<bool>();
-            bool useW = _menu.Item("hyunmi.lissandra.lasthit.spells.w").GetValue<bool>();
-            bool useE = _menu.Item("hyunmi.lissandra.lasthit.spells.e").GetValue<bool>();
-
-            if (smartPassive && Player.HasBuff("LissandraPassiveReady"))
-            {
-                if (groupFocus)
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, true);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, true);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, true);
-                    }
-                }
-                else
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, false);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, false);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, false);
-                    }
-                }
-            }
-
-            if (!smartPassive)
-            {
-                if (groupFocus)
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, true);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, true);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, true);
-                    }
-                }
-                else
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, false);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, false);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, false);
-                    }
-                }
-            }
-        }
-
-        //TODO: add manalimiters
-        //TODO: remove redundancy
-        // ReSharper disable once FunctionComplexityOverflow
         private static void LaneClear()
         {
             bool smartPassive = _menu.Item("hyunmi.lissandra.laneclear.smartPassive").GetValue<bool>();
@@ -354,86 +256,19 @@ namespace Meth_Lissy
             bool useE = _menu.Item("hyunmi.lissandra.laneclear.spells.e").GetValue<bool>();
             bool harass = _menu.Item("hyunmi.lissandra.laneclear.harass").GetValue<bool>();
 
-            if (harass)
-            {
-                Harass();
-            }
+            ActiveModes.LaneClear(smartPassive, groupFocus, useQ, useW, useE, harass);
+        }
 
-            if (smartPassive && Player.HasBuff("LissandraPassiveReady"))
-            {
-                if (groupFocus)
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, true);
-                    }
+        //TODO: add manalimiters
+        private static void LastHit()
+        {
+            bool smartPassive = _menu.Item("hyunmi.lissandra.lasthit.smartPassive").GetValue<bool>();
+            bool groupFocus = _menu.Item("hyunmi.lissandra.lasthit.groupfocus").GetValue<bool>();
+            bool useQ = _menu.Item("hyunmi.lissandra.lasthit.spells.q").GetValue<bool>();
+            bool useW = _menu.Item("hyunmi.lissandra.lasthit.spells.w").GetValue<bool>();
+            bool useE = _menu.Item("hyunmi.lissandra.lasthit.spells.e").GetValue<bool>();
 
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, true);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, true);
-                    }
-                }
-                else
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, false);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, false);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, false);
-                    }
-                }
-            }
-
-            if (!smartPassive)
-            {
-                if (groupFocus)
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, true);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, true);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, true);
-                    }
-                }
-                else
-                {
-                    if (useW)
-                    {
-                        SpellCasts.RingOfFrostCast(true, false);
-                    }
-
-                    if (useE)
-                    {
-                        SpellCasts.GlacialPathCast(true, false);
-                    }
-
-                    if (useQ)
-                    {
-                        SpellCasts.IceShardCast(true, false);
-                    }
-                }
-            }
+            ActiveModes.LaneClear(smartPassive, groupFocus, useQ, useW, useE, false);
         }
 
         private static void Harass()
@@ -441,6 +276,8 @@ namespace Meth_Lissy
             bool useQ = _menu.Item("hyunmi.lissandra.harass.spells.q").GetValue<bool>();
             bool useW = _menu.Item("hyunmi.lissandra.harass.spells.w").GetValue<bool>();
             bool useE = _menu.Item("hyunmi.lissandra.harass.spells.e").GetValue<bool>();
+
+            ActiveModes.Harass();
         }
 
         //TODO: add manalimers
