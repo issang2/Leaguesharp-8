@@ -30,6 +30,7 @@ namespace Eve
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (Player.IsRecalling()) return;
             if (_q.IsReady())
             {
                 if (Player.CountEnemiesInRange(500) > 0)

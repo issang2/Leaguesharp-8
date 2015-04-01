@@ -31,6 +31,7 @@ namespace Nami
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (Player.IsRecalling()) return;
             if (Player.CountEnemiesInRange(725) > 0 && _w.IsReady())
             {
                 _w.CastOnUnit(Player.GetEnemiesInRange(725).OrderByDescending(target => target.Health).Last());

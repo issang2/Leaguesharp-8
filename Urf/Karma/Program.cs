@@ -32,6 +32,7 @@ namespace Karma
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (Player.IsRecalling()) return;
             if (_shield.IsReady())
             {
                 _shield.CastOnUnit(Player.GetAlliesInRange(800).LastOrDefault());

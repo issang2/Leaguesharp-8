@@ -31,6 +31,7 @@ namespace Sona
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (Player.IsRecalling())return;
             if (Player.CountAlliesInRange(1000) > 0)
             {
                 _w.Cast();

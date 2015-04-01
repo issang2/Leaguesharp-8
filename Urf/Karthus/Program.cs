@@ -31,6 +31,7 @@ namespace Karthus
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (Player.IsRecalling()) return;
             if (Player.CountEnemiesInRange(875) > 0 && _q.IsReady())
             {
                 _q.CastOnUnit(Player.GetEnemiesInRange(875).OrderByDescending(target => target.Health).Last());
