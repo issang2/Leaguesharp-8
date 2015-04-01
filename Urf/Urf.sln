@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eve", "Eve\Eve.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karthus", "Karthus\Karthus.csproj", "{9FA58D77-DCCE-4573-9F03-DBD8B983CFB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nami", "Nami\Nami.csproj", "{1D3DFEDA-ADFF-407C-A12C-BE35C0E2DCF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9FA58D77-DCCE-4573-9F03-DBD8B983CFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FA58D77-DCCE-4573-9F03-DBD8B983CFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FA58D77-DCCE-4573-9F03-DBD8B983CFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3DFEDA-ADFF-407C-A12C-BE35C0E2DCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3DFEDA-ADFF-407C-A12C-BE35C0E2DCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3DFEDA-ADFF-407C-A12C-BE35C0E2DCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3DFEDA-ADFF-407C-A12C-BE35C0E2DCF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
