@@ -34,7 +34,7 @@ namespace Janna
         {
             if (_shield.IsReady())
             {
-                _shield.CastOnUnit(Player.GetAlliesInRange(800).FirstOrDefault());
+                _shield.CastOnUnit(Player.GetAlliesInRange(800).LastOrDefault());
             }
         }
     }
