@@ -23,7 +23,7 @@ namespace Karma
         {
             if (Player.ChampionName != "Karma") return;
 
-            Game.PrintChat("Urferino janna by HyunMi loaded");
+            Game.PrintChat("Urferino Karma by HyunMi loaded");
             _shield = new Spell(SpellSlot.E, 800);
 
             Game.OnUpdate += Game_OnUpdate;
